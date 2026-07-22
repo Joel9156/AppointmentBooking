@@ -8,14 +8,12 @@
 
         public AppointmentRequest(Patient patient, Doctor doctor, DateTime requestedDate)
         {
-            // Reject a request that's missing a patient or doctor,
-            // instead of letting a null slip through to later code.
             Patient = patient ?? throw new ArgumentNullException(nameof(patient));
             Doctor = doctor ?? throw new ArgumentNullException(nameof(doctor));
 
-            // A request for a past date makes no sense for booking a future appointment.
-            if (requestedDate.Date < DateTime.Today)
-                throw new ArgumentException("Requested appointment date cannot be in the past.");
+            // The clinic requires at least one day's notice, so today's date is not allowed.
+            if (requestedDate.Date <= DateTime.Today)
+                throw new ArgumentException("Appointments require at least one day's notice; the requested date cannot be today or in the past.");
 
             RequestedDate = requestedDate;
         }

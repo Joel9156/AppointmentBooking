@@ -2,15 +2,12 @@
 {
     public class Doctor
     {
-        // Id and FullName have no public setter, so they can't be changed after creation.
+        private const int MaxDailyAppointments = 5;
+
         public string Id { get; }
         public string FullName { get; }
-
-        // AvailableSlots can only be changed inside this class (private set),
-        // preventing external code from directly modifying the slot count.
         public int AvailableSlots { get; private set; }
 
-        // Validation happens here so a Doctor object can never exist in an invalid state.
         public Doctor(string id, string fullName, int availableSlots)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -22,18 +19,20 @@
             if (availableSlots < 0)
                 throw new ArgumentException("Available slots cannot be negative.");
 
+            // A doctor cannot be configured with more slots than the daily appointment limit allows.
+            if (availableSlots > MaxDailyAppointments)
+                throw new ArgumentException($"Available slots cannot exceed the maximum of {MaxDailyAppointments} appointments per day.");
+
             Id = id;
             FullName = fullName;
             AvailableSlots = availableSlots;
         }
 
-        // Lets other code check slot availability without touching the slot count directly.
         public bool HasAvailableSlot()
         {
             return AvailableSlots > 0;
         }
 
-        // The only way to reduce AvailableSlots, and it blocks reserving when none are left.
         public void ReserveSlot()
         {
             if (!HasAvailableSlot())
