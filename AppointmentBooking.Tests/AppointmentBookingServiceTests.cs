@@ -136,5 +136,55 @@ namespace ENSE707_AppointmentBooking.Tests
 
             StringAssert.Contains(result.Message, "no available slots");
         }
+        [TestMethod]
+        public void AppointmentRequest_WhenDateIsToday_ThrowsException()
+        {
+            var doctor = new Doctor("D001", "Dr Mark", 2);
+            var patient = new Patient("P001", "Diana William");
+
+            Assert.ThrowsExactly<ArgumentException>(() =>
+                new AppointmentRequest(patient, doctor, DateTime.Today));
+        }
+
+        [TestMethod]
+        public void AppointmentRequest_WhenDateIsTomorrow_IsAccepted()
+        {
+            var doctor = new Doctor("D001", "Dr Mark", 2);
+            var patient = new Patient("P001", "Diana William");
+
+            var request = new AppointmentRequest(patient, doctor, DateTime.Today.AddDays(1));
+
+            Assert.AreEqual(DateTime.Today.AddDays(1), request.RequestedDate);
+        }
+
+        [TestMethod]
+        public void Doctor_WhenAvailableSlotsExceedsMaxDaily_ThrowsException()
+        {
+            Assert.ThrowsExactly<ArgumentException>(() =>
+                new Doctor("D001", "Dr Mark", 6));
+        }
+
+        [TestMethod]
+        public void BookAppointment_WhenSuccessful_MessageIncludesDoctorName()
+        {
+            var doctor = new Doctor("D001", "Dr Mark", 2);
+            var patient = new Patient("P001", "Diana William");
+            var request = new AppointmentRequest(patient, doctor, DateTime.Today.AddDays(1));
+
+            var service = new AppointmentBookingService();
+
+            BookingResult result = service.BookAppointment(request);
+
+            StringAssert.Contains(result.Message, "Dr Mark");
+        }
+
+        [TestMethod]
+        public void BookAppointment_WhenPatientIdMissing_ThrowsException()
+        {
+            var doctor = new Doctor("D001", "Dr Mark", 2);
+
+            Assert.ThrowsExactly<ArgumentException>(() =>
+                new Patient("", "Diana William"));
+        }
     }
 }
