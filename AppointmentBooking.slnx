@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/docs/">
     <File Path="ContinuousImprovement.md" />
+    <File Path="CopilotUsageLog.md" />
     <File Path="QualityGovernance.md" />
     <File Path="TestPlan.md" />
     <File Path="TestStrategy.md" />
