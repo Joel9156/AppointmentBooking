@@ -36,4 +36,16 @@ verifiable rather than relying on assumptions. Each rule is tied to concrete evi
 checked at any time. For example, the rule that "code must pass all unit tests before
 commit" gives the team a clear gate to check before pushing changes, and the requirement
 that AI-generated suggestions be reviewed ensures that GitHub Copilot supports the team's
-judgement rather than
+judgement rather than replacing it. Together, these rules create accountability and
+traceability across the whole development process, from requirements through to release.
+
+## Defect Log
+
+| Defect ID | Description | Severity | Status | Found In | Fixed In |
+|---|---|---|---|---|---|
+| DEF001 (sample) | Slot count did not increase after cancellation | High | Fixed | Cancellation test | Updated CancelAppointment method |
+
+> Note: No real defects were found during Week 3 testing (see Test Summary Report,
+> Section 6). DEF001 above is a sample entry, included to demonstrate the format of
+> the defect log as required by the lab, and does not reflect an actual bug found in
+> this project.
