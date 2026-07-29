@@ -17,7 +17,7 @@
                     return LegalName;
 
                 return PreferredName;
-            }
+            }   
         }
 
         public Patient(string id, string legalName, string preferredName = "")

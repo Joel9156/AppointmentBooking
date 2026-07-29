@@ -40,5 +40,9 @@
 
             AvailableSlots--;
         }
+        public void ReleaseSlot()
+        {
+            AvailableSlots++;
+        }
     }
 }

@@ -8,10 +8,20 @@
         // Explains why the booking succeeded or failed, so the user isn't left guessing.
         public string Message { get; }
 
+        // The created Appointment when booking succeeds; null when it fails.
+        public Appointment? Appointment { get; }
+
         public BookingResult(bool success, string message)
         {
             Success = success;
             Message = message;
+        }
+
+        public BookingResult(bool success, string message, Appointment? appointment)
+        {
+            Success = success;
+            Message = message;
+            Appointment = appointment;
         }
     }
 }
