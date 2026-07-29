@@ -65,3 +65,14 @@ apply to teamwork: shared processes, checklists, and evidence create
 a common standard everyone can be held to. In the next phase, tests
 will be written before or alongside implementation rather than only
 afterward, to catch issues even earlier.
+
+## Agile and DevOps Quality Practices for This Project
+
+| Practice | How It Could Be Used in This Project |
+|---|---|
+| Sprint planning | Select a small set of features and quality tasks for the week, e.g. implementing and testing the cancellation feature before starting the next one |
+| Daily stand-up | Discuss progress, blockers, and testing issues, such as the namespace mismatch encountered while adding the Appointment class |
+| Definition of Done | A feature is complete only when it is coded, reviewed, tested (unit tests passing), and documented (e.g. requirements and test plan updated) |
+| Continuous Integration | Automatically run the full test suite (all 22 tests) whenever code is pushed, to catch regressions immediately |
+| Regression testing | Re-run existing tests (e.g. the original 17 booking tests) after each change, as was done after adding the cancellation feature |
+| Retrospective | Review what went well (e.g. writing tests right after implementation) and what should improve (e.g. checking build warnings more carefully), as captured in the Continuous Improvement section above |
