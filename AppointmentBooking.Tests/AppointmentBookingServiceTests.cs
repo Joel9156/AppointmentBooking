@@ -186,5 +186,36 @@ namespace ENSE707_AppointmentBooking.Tests
             Assert.ThrowsExactly<ArgumentException>(() =>
                 new Patient("", "Diana William"));
         }
+
+        [TestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        [DataRow(2, true)]
+        public void Doctor_HasAvailableSlot_BoundaryCases(int availableSlots, bool expected)
+        {
+            var doctor = new Doctor("D001", "Dr Mark", availableSlots);
+            Assert.AreEqual(expected, doctor.HasAvailableSlot());
+        }
+
+        [TestMethod]
+        [DataRow(-1, false)]  // yesterday
+        [DataRow(1, true)]    // tomorrow
+        public void AppointmentRequest_DateBoundary_Cases(int daysFromToday, bool expectedValid)
+        {
+            var doctor = new Doctor("D001", "Dr Mark", 2);
+            var patient = new Patient("P001", "Diana William");
+            var date = DateTime.Today.AddDays(daysFromToday);
+
+            if (expectedValid)
+            {
+                var request = new AppointmentRequest(patient, doctor, date);
+                Assert.AreEqual(date, request.RequestedDate);
+            }
+            else
+            {
+                Assert.ThrowsExactly<ArgumentException>(() =>
+                    new AppointmentRequest(patient, doctor, date));
+            }
+        }
     }
 }

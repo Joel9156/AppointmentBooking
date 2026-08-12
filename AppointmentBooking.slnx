@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/docs/">
+    <File Path="BlackBoxTestDesign.md" />
     <File Path="ContinuousImprovement.md" />
     <File Path="CopilotUsageLog.md" />
     <File Path="QualityGovernance.md" />
